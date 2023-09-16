@@ -15,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var quizItems: List<QuizItem>
     private val numbers = mutableListOf(0, 1, 2, 3, 4)
+    private var score = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -47,8 +48,8 @@ class MainActivity : AppCompatActivity() {
                 listOf(
                     Pair("15 de septiembre", false),
                     Pair("16 de agosto", false),
-                    Pair("16 de septiembre", false),
-                    Pair("17 de septiembre", true)
+                    Pair("16 de septiembre", true),
+                    Pair("17 de septiembre", false)
                 )
             ),
             QuizItem(
@@ -96,14 +97,21 @@ class MainActivity : AppCompatActivity() {
         showMessage(answer)
         numbers.removeAt(0)
         if (numbers.isEmpty()) {
-            /*numbers.addAll(listOf(1, 2, 3, 4, 5))
-            numbers.shuffle()*/
+            binding.apply {
+                tvQuestion.text = "Tu puntuación es: $score de 5"
+                btnAnswer1.text = ""
+                btnAnswer2.text = ""
+                btnAnswer3.text = ""
+                btnAnswer4.text = ""
+            }
+        } else {
+            showQuizItem(numbers[0])
         }
-        showQuizItem(numbers[0])
     }
 
     private fun showMessage (answer: Boolean) {
         if (answer) {
+            score++
             Toast.makeText(this, "¡RESPUESTA CORRECTA! ✅", Toast.LENGTH_LONG).show()
         } else {
             Toast.makeText(this, "¡RESPUESTA INCORRECTA! ❌", Toast.LENGTH_LONG).show()
