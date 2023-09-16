@@ -100,9 +100,15 @@ class MainActivity : AppCompatActivity() {
             binding.apply {
                 tvQuestion.text = "Tu puntuación es: $score de 5"
                 btnAnswer1.text = ""
+                btnAnswer1.isEnabled = false
                 btnAnswer2.text = ""
+                btnAnswer2.isEnabled = false
                 btnAnswer3.text = ""
+                btnAnswer3.isEnabled = false
                 btnAnswer4.text = ""
+                btnAnswer4.isEnabled = false
+
+
             }
         } else {
             showQuizItem(numbers[0])
